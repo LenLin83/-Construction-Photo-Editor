@@ -15,6 +15,7 @@ class MainWindow(QWidget):
         self.setGeometry(100, 100, 1200, 1000)
         self.tabs = QTabWidget()
         
+        
         self.case_tab = ConstructionApp()
         self.tabs.addTab(self.case_tab, "案件版")
         
@@ -44,7 +45,9 @@ class MainWindow(QWidget):
         event.accept()
 
 if __name__ == '__main__':
+    from PyQt5.QtWidgets import QApplication
     app = QApplication(sys.argv)
+    app.aboutToQuit.connect(lambda: print("Application is about to quit", flush=True))
     window = MainWindow()
     window.show()
     sys.exit(app.exec_())
