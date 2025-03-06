@@ -2,9 +2,11 @@
 import sys, os, json
 from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QComboBox, QLabel, QLineEdit,
-    QListWidget, QPushButton, QMessageBox, QAbstractItemView, QCheckBox
+    QListWidget, QPushButton, QMessageBox, QAbstractItemView, QCheckBox,
+    QListWidgetItem
 )
-from PyQt5.QtCore import QSettings
+from PyQt5.QtCore import QSettings, Qt, QPoint
+from PyQt5.QtGui import QPixmap
 from docxtpl import DocxTemplate, InlineImage
 from docx.shared import Cm
 from PIL import Image, ImageDraw, ImageFont
@@ -156,7 +158,6 @@ class BaseConstructionApp(QWidget):
 
     def add_form_item(self, item_data=None):
         widget = FormItemWidget(item_data)
-        from PyQt5.QtWidgets import QListWidgetItem
         list_item = QListWidgetItem()
         list_item.setSizeHint(widget.sizeHint())
         self.item_list.addItem(list_item)
@@ -261,7 +262,7 @@ class BaseConstructionApp(QWidget):
         
         # 若沒輸入文字，就不進行儲存
         if not id_value or not address_value:
-            print("未輸入任何文字，不儲存")
+            # print("未輸入任何文字，不儲存")
             return
         
         project_name = f"{id_value}-{address_value}"
